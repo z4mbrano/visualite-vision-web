@@ -112,7 +112,7 @@ const Location = () => {
                   <Mail className="w-5 h-5 text-accent" />
                   <div>
                     <div className="text-sm text-muted-foreground">E-mail</div>
-                    <div className="font-medium text-foreground text-sm">guilherrme.bohn@gmail.com</div>
+                    <div className="font-medium text-foreground text-sm">contato@visualite.com</div>
                   </div>
                 </div>
               </div>

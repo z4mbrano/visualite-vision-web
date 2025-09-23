@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Send, CheckCircle, Clock, Phone } from 'lucide-react';
+import { Send, Loader2, CheckCircle, Clock, Phone } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import emailjs from '@emailjs/browser';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -23,39 +24,107 @@ const Contact = () => {
     "Óculos de Grau",
     "Óculos de Sol", 
     "Lentes de Contato",
-    "Conserto de Óculos",
+    "Conserto Express",
     "Outros"
   ];
 
   const timeSlots = [
     "Manhã (9h às 12h)",
-    "Tarde (12h às 17h)",
-    "Noite (17h às 19h)",
-    "Não tenho preferência"
+    "Tarde (12h às 18h)",
+    "Noite (18h às 19h)",
+    "Sábado (9h às 17h)",
+    "Domingo (10h às 16h)",
+    "Atendimento Online 24h"
   ];
+
+  const handlePhoneInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let value = e.target.value.replace(/\D/g, '');
+    if (value.length <= 11) {
+      value = value.replace(/(\d{2})(\d{4,5})(\d{4})/, '($1) $2-$3');
+    }
+    setFormData(prev => ({ ...prev, phone: value }));
+  };
 
   const handleInputChange = (field: string, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }));
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-
-    // Validate required fields
-    if (!formData.name || !formData.email || !formData.phone || !formData.service) {
+  const validateForm = () => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const phoneRegex = /^\(\d{2}\)\s\d{4,5}-\d{4}$/;
+    
+    if (formData.name.length < 2) {
       toast({
-        title: "Campos obrigatórios",
-        description: "Por favor, preencha todos os campos obrigatórios.",
+        title: "Campo inválido",
+        description: "Por favor, digite seu nome completo",
         variant: "destructive"
       });
-      setIsSubmitting(false);
+      return false;
+    }
+    
+    if (!emailRegex.test(formData.email)) {
+      toast({
+        title: "Campo inválido",
+        description: "Por favor, digite um email válido",
+        variant: "destructive"
+      });
+      return false;
+    }
+    
+    if (!phoneRegex.test(formData.phone)) {
+      toast({
+        title: "Campo inválido",
+        description: "Por favor, digite um telefone válido no formato (11) 99999-9999",
+        variant: "destructive"
+      });
+      return false;
+    }
+    
+    if (!formData.service || formData.service === 'Selecione um serviço') {
+      toast({
+        title: "Campo obrigatório",
+        description: "Por favor, selecione um serviço de interesse",
+        variant: "destructive"
+      });
+      return false;
+    }
+    
+    if (!formData.preferredTime || formData.preferredTime === 'Selecione um horário') {
+      toast({
+        title: "Campo obrigatório",
+        description: "Por favor, selecione um horário preferido",
+        variant: "destructive"
+      });
+      return false;
+    }
+    
+    return true;
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    if (!validateForm()) {
       return;
     }
 
-    // Simulate form submission
+    setIsSubmitting(true);
+
     try {
-      await new Promise(resolve => setTimeout(resolve, 2000));
+      await emailjs.send(
+        'service_psozjt3',  // Replace with your EmailJS service ID
+        'template_vk52aue', // Replace with your EmailJS template ID
+        {
+          to_email: 'visualiteotica@gmail.com',
+          from_name: formData.name,
+          from_email: formData.email,
+          telefone: formData.phone,
+          servico: formData.service,
+          horario: formData.preferredTime,
+          message: formData.message || 'Sem mensagem adicional'
+        },
+        'EBjTDB7RU_m_-NWwp'   // Replace with your EmailJS public key
+      );
       
       toast({
         title: "Mensagem enviada com sucesso!",
@@ -74,7 +143,7 @@ const Contact = () => {
     } catch (error) {
       toast({
         title: "Erro ao enviar mensagem",
-        description: "Tente novamente ou entre em contato via WhatsApp.",
+        description: "Tente novamente ou entre em contato pelo WhatsApp.",
         variant: "destructive"
       });
     } finally {
@@ -124,10 +193,11 @@ const Contact = () => {
                     id="phone"
                     type="tel"
                     value={formData.phone}
-                    onChange={(e) => handleInputChange('phone', e.target.value)}
+                    onChange={handlePhoneInput}
                     placeholder="(11) 99999-9999"
                     required
                     className="w-full"
+                    maxLength={15}
                   />
                 </div>
               </div>
@@ -168,7 +238,7 @@ const Contact = () => {
 
                 <div>
                   <label htmlFor="preferredTime" className="block text-sm font-medium text-foreground mb-2">
-                    Horário Preferido
+                    Horário Preferido *
                   </label>
                   <Select value={formData.preferredTime} onValueChange={(value) => handleInputChange('preferredTime', value)}>
                     <SelectTrigger>
@@ -193,7 +263,7 @@ const Contact = () => {
                   id="message"
                   value={formData.message}
                   onChange={(e) => handleInputChange('message', e.target.value)}
-                  placeholder="Conte-nos como podemos ajudá-lo..."
+                  placeholder="Digite sua mensagem ou dúvida..."
                   rows={4}
                   className="w-full"
                 />
