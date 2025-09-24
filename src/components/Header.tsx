@@ -40,7 +40,7 @@ const Header = () => {
         <div className="flex justify-between items-center">
           {/* Logo */}
           <div className="flex items-center space-x-3">
-            <div className="w-12 h-12 rounded-lg overflow-hidden">
+            <div className=" h-12 rounded-lg overflow-hidden">
               <img 
                 src={logoImage} 
                 alt="Visualité Logo"
@@ -48,8 +48,7 @@ const Header = () => {
               />
             </div>
             <div>
-              <h1 className="text-2xl font-bold text-gradient-primary font-serif">Visualité</h1>
-              <p className="text-sm text-muted-foreground">Sua Visão é Nossa Prioridade</p>
+              <h1 className="text-4xl font-bold text-gradient-primary font-serif">Visualité</h1>
             </div>
           </div>
 
