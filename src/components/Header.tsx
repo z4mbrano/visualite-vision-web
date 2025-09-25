@@ -36,8 +36,8 @@ const Header = () => {
       </div>
 
       {/* Main Header */}
-      <div className="section-container py-4">
-        <div className="flex justify-between items-center ml-1">
+      <div className="section-container py-4 px-4">
+        <div className="flex justify-between items-center">
           {/* Logo */}
           <div className="flex items-center space-x-3">
             <div className="w-12 h-12 rounded-lg overflow-hidden">
@@ -48,7 +48,7 @@ const Header = () => {
               />
             </div>
             <div>
-              <h1 className="text-4xl font-bold text-gradient-primary font-serif">Visualité</h1>
+              <h1 className="text-3xl md:text-4xl font-bold text-gradient-primary font-serif">Visualité</h1>
             </div>
           </div>
 

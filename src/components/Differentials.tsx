@@ -90,7 +90,7 @@ const Differentials = () => {
         </div>
 
         {/* Bottom Highlight */}
-        <div className="mt-16 text-center">
+        <div className="mt-16 text-center hidden md:block">
           <div className="inline-flex items-center space-x-6 bg-white rounded-2xl p-6 shadow-lg border border-accent/20">
             <div className="flex items-center space-x-3">
               <div className="w-3 h-3 bg-success rounded-full animate-pulse"></div>
