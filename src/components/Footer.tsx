@@ -1,5 +1,5 @@
 import React from 'react';
-import { MapPin, Phone, Mail, Clock, Shield, Award } from 'lucide-react';
+import { MapPin, Phone, Mail, Instagram, Clock, Shield, Award } from 'lucide-react';
 
 const Footer = () => {
   const scrollToSection = (sectionId: string) => {
@@ -110,6 +110,11 @@ const Footer = () => {
               <div className="flex items-center space-x-3">
                 <Mail className="w-5 h-5 text-accent" />
                 <div className="text-white/90 text-sm">visualiteotica@gmail.com</div>
+              </div>
+
+              <div className="flex items-center space-x-3">
+                <Instagram  className="w-5 h-5 text-accent" />
+                <div className="text-white/90 text-sm"><a href='https://www.instagram.com/visualiteotica?igsh=MTV2ZjY3M2s3NjhuNA%3D%3D&utm_source=qr' target='_blank'>@visualiteotica</a></div>
               </div>
             </div>
           </div>
