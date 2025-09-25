@@ -302,12 +302,12 @@ const Contact = () => {
                   </div>
                   <div>
                     <div className="font-medium text-foreground">WhatsApp</div>
-                    <div className="text-muted-foreground">(51) 99123-4567</div>
+                    <div className="text-muted-foreground">(51) 98922-8808</div>
                   </div>
                 </div>
 
                 <a
-                  href="https://wa.me/5551991234567?text=Olá! Gostaria de agendar uma consulta na Visualité"
+                  href="https://wa.me/5551989228808?text=Olá! Gostaria de agendar uma consulta na Visualité"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn-accent w-full block text-center"

@@ -22,7 +22,7 @@ const Header = () => {
           <div className="flex items-center space-x-6">
             <div className="flex items-center space-x-2">
               <Phone className="w-4 h-4" />
-              <span>(51) 99123-4567</span>
+              <span>(51) 98922-8808</span>
             </div>
             <div className="hidden md:flex items-center space-x-2">
               <MapPin className="w-4 h-4" />
@@ -37,10 +37,10 @@ const Header = () => {
 
       {/* Main Header */}
       <div className="section-container py-4">
-        <div className="flex justify-between items-center">
+        <div className="flex justify-between items-center ml-1">
           {/* Logo */}
           <div className="flex items-center space-x-3">
-            <div className=" h-12 rounded-lg overflow-hidden">
+            <div className="w-12 h-12 rounded-lg overflow-hidden">
               <img 
                 src={logoImage} 
                 alt="Visualité Logo"

@@ -102,7 +102,7 @@ const Location = () => {
                   <Phone className="w-5 h-5 text-accent" />
                   <div>
                     <div className="text-sm text-muted-foreground">Telefone</div>
-                    <div className="font-medium text-foreground">(51) 99123-4567</div>
+                    <div className="font-medium text-foreground">(51) 98922-8808</div>
                   </div>
                 </div>
               </div>
