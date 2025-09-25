@@ -64,7 +64,7 @@ const Hero = () => {
             <Button 
               onClick={() => scrollToSection('servicos')}
               variant="outline"
-              className="btn-outline border-white text-white hover:bg-white hover:text-primary"
+              className="btn-outline border-white text-primary"
             >
               Nossos Serviços
             </Button>
